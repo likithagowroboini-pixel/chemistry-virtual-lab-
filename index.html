@@ -1,1 +1,274 @@
+<!DOCTYPE html>
+<html lang="en">
 
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>SRM Chemistry Virtual Lab</title>
+
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+<header>
+
+    <img src="srm-logo.png" alt="SRM IST Tiruchirappalli Logo" class="logo">
+
+    <h1>SRM INSTITUTE OF SCIENCE AND TECHNOLOGY</h1>
+
+    <h2>TIRUCHIRAPPALLI</h2>
+
+    <p>Department of Chemistry</p>
+
+    <div class="lab-title">
+        🧪 CHEMISTRY VIRTUAL LAB
+    </div>
+
+</header>
+
+
+<nav>
+
+    <a href="#aim">Aim</a>
+    <a href="#theory">Theory</a>
+    <a href="#apparatus">Apparatus</a>
+    <a href="#experiment">Experiment</a>
+    <a href="#observation">Observation</a>
+    <a href="#result">Result</a>
+
+</nav>
+
+
+<main class="container">
+
+
+<section id="aim" class="card">
+
+    <h2>🎯 Aim</h2>
+
+    <p>
+        To perform a virtual acid-base titration and determine
+        the concentration of an unknown solution.
+    </p>
+
+</section>
+
+
+<section id="theory" class="card">
+
+    <h2>📚 Theory</h2>
+
+    <p>
+        Acid-base titration is a quantitative analytical technique
+        used to determine the concentration of an unknown solution
+        using a solution of known concentration.
+    </p>
+
+    <p>
+        The calculation is based on the equation:
+    </p>
+
+    <h3>C₁V₁ = C₂V₂</h3>
+
+</section>
+
+
+<section id="apparatus" class="card">
+
+    <h2>🧰 Apparatus</h2>
+
+    <ul>
+
+        <li>Burette</li>
+
+        <li>Conical flask</li>
+
+        <li>Acid solution</li>
+
+        <li>Base solution</li>
+
+        <li>Indicator</li>
+
+        <li>Distilled water</li>
+
+    </ul>
+
+</section>
+
+
+<section id="experiment" class="card">
+
+    <h2>🔬 Virtual Experiment</h2>
+
+    <div class="experiment-area">
+
+
+        <div class="apparatus">
+
+            <h3>Burette</h3>
+
+            <div class="burette">
+
+                <div
+                    id="buretteLiquid"
+                    class="burette-liquid">
+                </div>
+
+                <div class="burette-markings">
+
+                    0<br>
+                    5<br>
+                    10<br>
+                    15<br>
+                    20<br>
+                    25
+
+                </div>
+
+            </div>
+
+            <p>
+                Volume:
+                <strong id="volumeDisplay">
+                    0.0 mL
+                </strong>
+            </p>
+
+        </div>
+
+
+        <div class="apparatus">
+
+            <h3>Conical Flask</h3>
+
+            <div class="flask">
+
+                <div class="flask-neck"></div>
+
+                <div class="flask-body">
+
+                    <div
+                        id="flaskLiquid"
+                        class="flask-liquid">
+                    </div>
+
+                </div>
+
+            </div>
+
+            <p>
+                Indicator + Unknown solution
+            </p>
+
+        </div>
+
+    </div>
+
+
+<div class="controls">
+
+    <button onclick="startExperiment()">
+        ▶ Start Experiment
+    </button>
+
+    <button onclick="addTitrant()">
+        🧪 Add Titrant
+    </button>
+
+    <button onclick="recordObservation()">
+        📋 Record Observation
+    </button>
+
+    <button onclick="calculateResult()">
+        🧮 Calculate
+    </button>
+
+    <button onclick="resetExperiment()">
+        🔄 Reset
+    </button>
+
+</div>
+
+
+<div id="experimentMessage" class="result">
+
+    Ready to begin the experiment.
+
+</div>
+
+</section>
+
+
+<section id="observation" class="card">
+
+    <h2>📊 Observation Table</h2>
+
+    <table id="observationTable">
+
+        <tr>
+
+            <th>Trial</th>
+
+            <th>Volume of Titrant</th>
+
+            <th>Observation</th>
+
+        </tr>
+
+    </table>
+
+</section>
+
+
+<section id="result" class="card">
+
+    <h2>✅ Result</h2>
+
+    <div id="result">
+
+        <p>No result calculated yet.</p>
+
+    </div>
+
+</section>
+
+
+<section class="card">
+
+    <h2>📄 Generate Report</h2>
+
+    <p>
+        Generate a basic laboratory report from your virtual experiment.
+    </p>
+
+    <button onclick="generateReport()">
+        📄 Generate Report
+    </button>
+
+</section>
+
+
+</main>
+
+
+<footer>
+
+    <p>
+        © 2026 SRM Institute of Science and Technology,
+        Tiruchirappalli
+    </p>
+
+    <p>
+        Chemistry Virtual Laboratory
+    </p>
+
+</footer>
+
+
+<script src="script.js"></script>
+
+</body>
+
+</html>
