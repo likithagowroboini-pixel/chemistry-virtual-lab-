@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -12,256 +11,359 @@
 
 <body>
 
-<header>
+<header class="hero">
 
-    <img src="srm-logo.png" alt="SRM IST Tiruchirappalli Logo" class="logo">
+    <div class="topbar">
+        <img src="srm-logo.png" class="logo" alt="SRM Logo">
 
-    <h1>SRM INSTITUTE OF SCIENCE AND TECHNOLOGY</h1>
+        <div>
+            <p class="college">SRM INSTITUTE OF SCIENCE AND TECHNOLOGY</p>
+            <p class="campus">TIRUCHIRAPPALLI</p>
+            <p class="department">Department of Chemistry</p>
+        </div>
+    </div>
 
-    <h2>TIRUCHIRAPPALLI</h2>
-
-    <p>Department of Chemistry</p>
-
-    <div class="lab-title">
-        🧪 CHEMISTRY VIRTUAL LAB
+    <div class="hero-title">
+        <span>🧪</span>
+        <div>
+            <h1>CHEMISTRY VIRTUAL LAB</h1>
+            <p>Interactive Acid–Base Titration Simulation</p>
+        </div>
     </div>
 
 </header>
 
 
 <nav>
-
-    <a href="#aim">Aim</a>
+    <a href="#overview">Overview</a>
     <a href="#theory">Theory</a>
-    <a href="#apparatus">Apparatus</a>
     <a href="#experiment">Experiment</a>
     <a href="#observation">Observation</a>
     <a href="#result">Result</a>
-
 </nav>
 
 
-<main class="container">
+<main>
 
+<section id="overview" class="intro">
 
-<section id="aim" class="card">
+    <div>
+        <span class="tag">VIRTUAL EXPERIMENT</span>
 
-    <h2>🎯 Aim</h2>
+        <h2>Explore Acid–Base Titration</h2>
 
-    <p>
-        To perform a virtual acid-base titration and determine
-        the concentration of an unknown solution.
-    </p>
+        <p>
+            Perform a simulated titration, observe the endpoint,
+            record your readings and calculate the concentration
+            of an unknown solution.
+        </p>
 
-</section>
+        <button onclick="startExperiment()" class="primary">
+            ▶ Start Experiment
+        </button>
+    </div>
 
+    <div class="info-card">
+        <h3>👩‍🔬 Team</h3>
 
-<section id="theory" class="card">
+        <p><b>G. Likitha</b></p>
+        <small>RA2611030050100</small>
 
-    <h2>📚 Theory</h2>
+        <hr>
 
-    <p>
-        Acid-base titration is a quantitative analytical technique
-        used to determine the concentration of an unknown solution
-        using a solution of known concentration.
-    </p>
-
-    <p>
-        The calculation is based on the equation:
-    </p>
-
-    <h3>C₁V₁ = C₂V₂</h3>
-
-</section>
-
-
-<section id="apparatus" class="card">
-
-    <h2>🧰 Apparatus</h2>
-
-    <ul>
-
-        <li>Burette</li>
-
-        <li>Conical flask</li>
-
-        <li>Acid solution</li>
-
-        <li>Base solution</li>
-
-        <li>Indicator</li>
-
-        <li>Distilled water</li>
-
-    </ul>
+        <p><b>B. Tarun Ram Keran</b></p>
+        <small>RA261103005086</small>
+    </div>
 
 </section>
 
 
-<section id="experiment" class="card">
+<section id="theory" class="section">
 
-    <h2>🔬 Virtual Experiment</h2>
+    <div class="section-heading">
+        <span>01</span>
+        <h2>📚 Theory</h2>
+    </div>
 
-    <div class="experiment-area">
+    <div class="theory-grid">
 
+        <div class="card">
+            <h3>What is titration?</h3>
 
-        <div class="apparatus">
+            <p>
+                Acid–base titration is a quantitative analytical
+                technique used to determine the concentration of
+                an unknown solution using a solution of known
+                concentration.
+            </p>
+        </div>
 
-            <h3>Burette</h3>
+        <div class="formula-card">
+            <h3>Key Equation</h3>
 
-            <div class="burette">
-
-                <div
-                    id="buretteLiquid"
-                    class="burette-liquid">
-                </div>
-
-                <div class="burette-markings">
-
-                    0<br>
-                    5<br>
-                    10<br>
-                    15<br>
-                    20<br>
-                    25
-
-                </div>
-
+            <div class="formula">
+                C₁V₁ = C₂V₂
             </div>
 
             <p>
-                Volume:
-                <strong id="volumeDisplay">
-                    0.0 mL
-                </strong>
+                C = Concentration<br>
+                V = Volume
             </p>
-
         </div>
 
+    </div>
 
-        <div class="apparatus">
+</section>
 
-            <h3>Conical Flask</h3>
 
-            <div class="flask">
+<section class="section">
 
-                <div class="flask-neck"></div>
+    <div class="section-heading">
+        <span>02</span>
+        <h2>🧰 Apparatus</h2>
+    </div>
 
-                <div class="flask-body">
+    <div class="apparatus-grid">
 
-                    <div
-                        id="flaskLiquid"
-                        class="flask-liquid">
+        <div>🧪<b>Burette</b></div>
+        <div>⚗️<b>Conical Flask</b></div>
+        <div>💧<b>Titrant</b></div>
+        <div>🧫<b>Indicator</b></div>
+        <div>🔬<b>Unknown Solution</b></div>
+        <div>💦<b>Distilled Water</b></div>
+
+    </div>
+
+</section>
+
+
+<section id="experiment" class="section experiment-section">
+
+    <div class="section-heading">
+        <span>03</span>
+        <h2>🔬 Virtual Experiment</h2>
+    </div>
+
+    <div class="experiment-card">
+
+        <div class="lab-area">
+
+            <!-- BURETTE -->
+
+            <div class="equipment">
+
+                <h3>🧪 Burette</h3>
+
+                <div class="burette">
+
+                    <div class="burette-liquid" id="buretteLiquid"></div>
+
+                    <div class="marks">
+                        <span>0 mL</span>
+                        <span>5 mL</span>
+                        <span>10 mL</span>
+                        <span>15 mL</span>
+                        <span>20 mL</span>
+                        <span>25 mL</span>
+                    </div>
+
+                    <div class="tap"></div>
+
+                </div>
+
+                <p class="reading">
+                    Burette reading:
+                    <strong id="volumeDisplay">0.0 mL</strong>
+                </p>
+
+            </div>
+
+
+            <!-- FLASK -->
+
+            <div class="equipment flask-equipment">
+
+                <h3>⚗️ Conical Flask</h3>
+
+                <div class="flask">
+
+                    <div class="flask-neck"></div>
+
+                    <div class="flask-body">
+
+                        <div id="flaskLiquid" class="flask-liquid"></div>
+
+                        <div id="drop" class="drop">●</div>
+
                     </div>
 
                 </div>
 
+                <p id="indicatorText">
+                    Indicator + Unknown Solution
+                </p>
+
             </div>
 
-            <p>
-                Indicator + Unknown solution
-            </p>
+        </div>
+
+
+        <div class="control-panel">
+
+            <h3>🎛 Experiment Controls</h3>
+
+            <div class="progress-container">
+
+                <div class="progress-bar">
+                    <div id="progress"></div>
+                </div>
+
+                <span id="progressText">0%</span>
+
+            </div>
+
+            <div class="buttons">
+
+                <button onclick="startExperiment()" class="start">
+                    ▶ Start
+                </button>
+
+                <button onclick="addTitrant()">
+                    🧪 Add Titrant
+                </button>
+
+                <button onclick="recordObservation()">
+                    📋 Record
+                </button>
+
+                <button onclick="calculateResult()">
+                    🧮 Calculate
+                </button>
+
+                <button onclick="resetExperiment()" class="reset">
+                    🔄 Reset
+                </button>
+
+            </div>
+
+            <div id="experimentMessage" class="message">
+                Ready to begin the experiment.
+            </div>
 
         </div>
 
     </div>
 
-
-<div class="controls">
-
-    <button onclick="startExperiment()">
-        ▶ Start Experiment
-    </button>
-
-    <button onclick="addTitrant()">
-        🧪 Add Titrant
-    </button>
-
-    <button onclick="recordObservation()">
-        📋 Record Observation
-    </button>
-
-    <button onclick="calculateResult()">
-        🧮 Calculate
-    </button>
-
-    <button onclick="resetExperiment()">
-        🔄 Reset
-    </button>
-
-</div>
-
-
-<div id="experimentMessage" class="result">
-
-    Ready to begin the experiment.
-
-</div>
-
 </section>
 
 
-<section id="observation" class="card">
+<section id="observation" class="section">
 
-    <h2>📊 Observation Table</h2>
+    <div class="section-heading">
+        <span>04</span>
+        <h2>📊 Observation</h2>
+    </div>
 
-    <table id="observationTable">
+    <div class="table-container">
 
-        <tr>
+        <table id="observationTable">
 
-            <th>Trial</th>
+            <thead>
+                <tr>
+                    <th>Trial</th>
+                    <th>Volume of Titrant</th>
+                    <th>Observation</th>
+                </tr>
+            </thead>
 
-            <th>Volume of Titrant</th>
+            <tbody>
+            </tbody>
 
-            <th>Observation</th>
-
-        </tr>
-
-    </table>
-
-</section>
-
-
-<section id="result" class="card">
-
-    <h2>✅ Result</h2>
-
-    <div id="result">
-
-        <p>No result calculated yet.</p>
+        </table>
 
     </div>
 
 </section>
 
 
-<section class="card">
+<section id="result" class="section">
 
-    <h2>📄 Generate Report</h2>
+    <div class="section-heading">
+        <span>05</span>
+        <h2>✅ Result</h2>
+    </div>
+
+    <div class="result-card" id="resultBox">
+
+        <div class="result-icon">🧪</div>
+
+        <div>
+            <h3>Experiment Result</h3>
+
+            <p id="resultText">
+                Complete the experiment and click Calculate.
+            </p>
+        </div>
+
+    </div>
+
+</section>
+
+
+<section class="section learning">
+
+    <h2>💡 What did you learn?</h2>
+
+    <div class="learning-grid">
+
+        <div>
+            <b>01</b>
+            <p>How titration determines unknown concentration.</p>
+        </div>
+
+        <div>
+            <b>02</b>
+            <p>How the endpoint is identified using an indicator.</p>
+        </div>
+
+        <div>
+            <b>03</b>
+            <p>How experimental volume is used in calculations.</p>
+        </div>
+
+    </div>
+
+</section>
+
+
+<section class="report-section">
+
+    <h2>📄 Final Report</h2>
 
     <p>
-        Generate a basic laboratory report from your virtual experiment.
+        Generate a printable report containing your experiment
+        readings and result.
     </p>
 
-    <button onclick="generateReport()">
+    <button onclick="generateReport()" class="primary">
         📄 Generate Report
     </button>
 
 </section>
-
 
 </main>
 
 
 <footer>
 
+    <h3>🧪 SRM Chemistry Virtual Lab</h3>
+
     <p>
-        © 2026 SRM Institute of Science and Technology,
-        Tiruchirappalli
+        Department of Chemistry · SRM Institute of Science and Technology
     </p>
 
     <p>
-        Chemistry Virtual Laboratory
+        Tiruchirappalli Campus · 2026
     </p>
 
 </footer>
@@ -270,5 +372,4 @@
 <script src="script.js"></script>
 
 </body>
-
 </html>
