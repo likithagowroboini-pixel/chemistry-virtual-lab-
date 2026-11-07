@@ -1,306 +1,384 @@
 let volume = 0;
-let experimentStarted = false;
+let started = false;
 let trialNumber = 0;
 
+const ENDPOINT = 25.0;
+const KNOWN_CONCENTRATION = 0.250;
+
 function startExperiment() {
-    experimentStarted = true;
+
+    started = true;
 
     document.getElementById("experimentMessage").innerHTML =
-        "🧪 Experiment started. Add titrant using the button.";
+        "🟢 Experiment started. Add titrant slowly until the endpoint is reached.";
 
-    volume = 0;
+    document.getElementById("indicatorText").innerHTML =
+        "Indicator added — ready for titration.";
 
-    document.getElementById("volumeDisplay").innerText =
-        volume.toFixed(1) + " mL";
+    document.getElementById("experiment").scrollIntoView({
+        behavior: "smooth"
+    });
 }
+
 
 function addTitrant() {
 
-    if (!experimentStarted) {
+    if (!started) {
+
         document.getElementById("experimentMessage").innerHTML =
             "⚠️ Please click Start Experiment first.";
+
         return;
     }
 
     if (volume >= 25) {
+
         document.getElementById("experimentMessage").innerHTML =
-            "⚠️ Maximum titrant volume reached.";
+            "🎯 Endpoint reached! Do not add more titrant.";
+
         return;
     }
 
     volume += 1;
 
+    updateExperiment();
+
+    const drop = document.getElementById("drop");
+
+    drop.classList.remove("animate");
+
+    void drop.offsetWidth;
+
+    drop.classList.add("animate");
+
+    if (volume < 20) {
+
+        document.getElementById("experimentMessage").innerHTML =
+            "🧪 Titrant added. Continue carefully.";
+
+    } else if (volume < 25) {
+
+        document.getElementById("experimentMessage").innerHTML =
+            "⚠️ Approaching endpoint. Add titrant carefully.";
+
+    } else {
+
+        document.getElementById("experimentMessage").innerHTML =
+            "🎯 Endpoint observed at 25.0 mL.";
+    }
+}
+
+
+function updateExperiment() {
+
     document.getElementById("volumeDisplay").innerText =
         volume.toFixed(1) + " mL";
 
-    document.getElementById("experimentMessage").innerHTML =
-        "🧪 Titrant added. Current volume: " +
-        volume.toFixed(1) + " mL";
+    const liquid =
+        document.getElementById("buretteLiquid");
+
+    liquid.style.height =
+        (100 - volume / 25 * 100) + "%";
+
+    const flaskLiquid =
+        document.getElementById("flaskLiquid");
+
+    flaskLiquid.style.height =
+        (45 + volume / 25 * 15) + "%";
+
+    if (volume >= 25) {
+
+        flaskLiquid.style.background = "#d86a9c";
+
+        document.getElementById("indicatorText").innerHTML =
+            "🎯 ENDPOINT DETECTED";
+
+    }
+
+    const percentage =
+        Math.min((volume / 25) * 100, 100);
+
+    document.getElementById("progress").style.width =
+        percentage + "%";
+
+    document.getElementById("progressText").innerText =
+        Math.round(percentage) + "%";
 }
+
 
 function recordObservation() {
 
-    if (!experimentStarted) {
+    if (!started) {
+
         document.getElementById("experimentMessage").innerHTML =
             "⚠️ Start the experiment first.";
+
         return;
     }
 
     if (volume === 0) {
+
         document.getElementById("experimentMessage").innerHTML =
-            "⚠️ Add titrant before recording.";
+            "⚠️ Add titrant before recording an observation.";
+
         return;
     }
 
     trialNumber++;
 
-    let table = document.getElementById("observationTable");
+    const tbody =
+        document.querySelector("#observationTable tbody");
 
-    let row = table.insertRow(-1);
+    const row =
+        document.createElement("tr");
 
-    let cell1 = row.insertCell(0);
-    let cell2 = row.insertCell(1);
-    let cell3 = row.insertCell(2);
+    const observation =
+        volume >= 25
+            ? "Endpoint observed"
+            : "Titrant added";
 
-    cell1.innerText = trialNumber;
-    cell2.innerText = volume.toFixed(1) + " mL";
-    cell3.innerText = "Endpoint observed";
+    row.innerHTML = `
+        <td>${trialNumber}</td>
+        <td>${volume.toFixed(1)} mL</td>
+        <td>${observation}</td>
+    `;
+
+    tbody.appendChild(row);
 
     document.getElementById("experimentMessage").innerHTML =
-        "✅ Observation recorded successfully.";
+        "📋 Observation recorded successfully.";
 }
+
 
 function calculateResult() {
 
-    if (volume === 0) {
+    if (volume < 25) {
+
         document.getElementById("experimentMessage").innerHTML =
-            "⚠️ Add titrant before calculating.";
+            "⚠️ Complete the titration up to the endpoint first.";
+
         return;
     }
 
-    // Example values
-    let knownConcentration = 0.1;
-    let knownVolume = 10;
+    /*
+       C1V1 = C2V2
 
-    let unknownConcentration =
-        (knownConcentration * volume) / knownVolume;
+       Known concentration = 0.250 M
+       Titrant volume = 25.0 mL
 
-    document.getElementById("result").innerHTML = `
-        <p><strong>Calculated Result:</strong></p>
-        <p>Volume of titrant = ${volume.toFixed(1)} mL</p>
-        <p>Concentration of unknown solution =
-        ${unknownConcentration.toFixed(3)} M</p>
-    `;
+       For this virtual experiment the unknown concentration
+       is set to 0.250 M at the endpoint.
+    */
+
+    const unknownConcentration = 0.250;
+
+    document.getElementById("resultText").innerHTML =
+        `<b>Endpoint volume:</b> 25.0 mL<br>
+         <b>Concentration of unknown solution:</b>
+         ${unknownConcentration.toFixed(3)} M`;
 
     document.getElementById("experimentMessage").innerHTML =
-        "✅ Result calculated successfully.";
+        "✅ Calculation completed successfully.";
+
+    document.getElementById("resultBox").style.border =
+        "3px solid #16805c";
+
+    document.getElementById("result").scrollIntoView({
+        behavior: "smooth"
+    });
 }
+
 
 function resetExperiment() {
 
     volume = 0;
-    experimentStarted = false;
+    started = false;
     trialNumber = 0;
 
     document.getElementById("volumeDisplay").innerText =
         "0.0 mL";
 
-    document.getElementById("experimentMessage").innerHTML =
+    document.getElementById("buretteLiquid").style.height =
+        "100%";
+
+    document.getElementById("flaskLiquid").style.height =
+        "45%";
+
+    document.getElementById("flaskLiquid").style.background =
+        "#f3c4d8";
+
+    document.getElementById("progress").style.width =
+        "0%";
+
+    document.getElementById("progressText").innerText =
+        "0%";
+
+    document.getElementById("indicatorText").innerText =
+        "Indicator + Unknown Solution";
+
+    document.getElementById("experimentMessage").innerText =
         "Ready to begin the experiment.";
 
-    document.getElementById("result").innerHTML =
-        "<p>No result calculated yet.</p>";
+    document.getElementById("resultText").innerText =
+        "Complete the experiment and click Calculate.";
 
-    let table = document.getElementById("observationTable");
-
-    while (table.rows.length > 1) {
-        table.deleteRow(1);
-    }
+    document.querySelector("#observationTable tbody").innerHTML =
+        "";
 }
+
 
 function generateReport() {
 
-    let reportWindow = window.open("", "_blank");
+    const reportWindow = window.open("", "_blank");
 
     if (!reportWindow) {
+
         alert("Please allow pop-ups for this website.");
+
         return;
     }
 
-    let resultText =
-        document.getElementById("result").innerText;
-
-    let observationTable =
-        document.getElementById("observationTable").outerHTML;
-
     reportWindow.document.write(`
-<!DOCTYPE html>
-<html>
-<head>
 
-<title>SRM Chemistry Virtual Lab Report</title>
+        <!DOCTYPE html>
 
-<style>
+        <html>
 
-body {
-    font-family: Arial, sans-serif;
-    margin: 40px;
-    line-height: 1.6;
-}
+        <head>
 
-h1, h2 {
-    text-align: center;
-    color: #17365D;
-}
+            <title>SRM Chemistry Virtual Lab Report</title>
 
-.header {
-    text-align: center;
-}
+            <style>
 
-.team {
-    margin-top: 20px;
-    border-collapse: collapse;
-    width: 100%;
-}
+                body {
+                    font-family: Arial;
+                    padding: 50px;
+                    color: #172033;
+                }
 
-.team th,
-.team td {
-    border: 1px solid #777;
-    padding: 10px;
-    text-align: center;
-}
+                h1 {
+                    color: #123f79;
+                }
 
-table {
-    border-collapse: collapse;
-    width: 100%;
-    margin-top: 15px;
-}
+                h2 {
+                    border-bottom: 2px solid #123f79;
+                    padding-bottom: 5px;
+                }
 
-th,
-td {
-    border: 1px solid #777;
-    padding: 8px;
-    text-align: center;
-}
+                .box {
+                    padding: 20px;
+                    background: #f1f5fa;
+                    margin: 20px 0;
+                }
 
-button {
-    padding: 10px 20px;
-    margin-top: 20px;
-    font-size: 16px;
-}
+                table {
+                    width: 100%;
+                    border-collapse: collapse;
+                }
 
-@media print {
-    button {
-        display: none;
-    }
-}
+                th, td {
+                    border: 1px solid #aaa;
+                    padding: 10px;
+                    text-align: center;
+                }
 
-</style>
+                th {
+                    background: #123f79;
+                    color: white;
+                }
 
-</head>
+            </style>
 
-<body>
+        </head>
 
-<div class="header">
+        <body>
 
-<h1>SRM INSTITUTE OF SCIENCE AND TECHNOLOGY</h1>
+            <h1>🧪 SRM Chemistry Virtual Lab</h1>
 
-<h2>TIRUCHIRAPPALLI</h2>
+            <p>
+                <b>Department of Chemistry</b><br>
+                SRM Institute of Science and Technology<br>
+                Tiruchirappalli
+            </p>
 
-<h3>Department of Chemistry</h3>
+            <h2>Team Members</h2>
 
-<h2>CHEMISTRY VIRTUAL LAB</h2>
+            <div class="box">
 
-</div>
+                <b>G. Likitha</b><br>
+                Registration No: RA2611030050100
 
-<hr>
+                <br><br>
 
-<h2>FINAL PROJECT REPORT</h2>
+                <b>B. Tarun Ram Keran</b><br>
+                Registration No: RA261103005086
 
-<h3>Team Members</h3>
+            </div>
 
-<table class="team">
+            <h2>Experiment</h2>
 
-<tr>
-<th>Name</th>
-<th>Registration Number</th>
-</tr>
+            <p>
+                Acid–Base Titration
+            </p>
 
-<tr>
-<td>G. Likitha</td>
-<td>RA2611030050100</td>
-</tr>
+            <h2>Aim</h2>
 
-<tr>
-<td>B. Tarun Ram Keran</td>
-<td>RA261103005086</td>
-</tr>
+            <p>
+                To determine the concentration of an unknown
+                solution using acid–base titration.
+            </p>
 
-</table>
+            <h2>Observation</h2>
 
-<h3>1. Aim</h3>
+            <table>
 
-<p>
-To perform a virtual acid-base titration and determine
-the concentration of an unknown solution.
-</p>
+                <tr>
+                    <th>Parameter</th>
+                    <th>Value</th>
+                </tr>
 
-<h3>2. Theory</h3>
+                <tr>
+                    <td>Endpoint Volume</td>
+                    <td>${volume.toFixed(1)} mL</td>
+                </tr>
 
-<p>
-Acid-base titration is a quantitative analytical technique
-used to determine the concentration of an unknown solution
-using a solution of known concentration.
-</p>
+                <tr>
+                    <td>Endpoint</td>
+                    <td>
+                        ${volume >= 25 ? "Observed" : "Not reached"}
+                    </td>
+                </tr>
 
-<p><strong>C₁V₁ = C₂V₂</strong></p>
+            </table>
 
-<h3>3. Apparatus</h3>
+            <h2>Result</h2>
 
-<ul>
-<li>Burette</li>
-<li>Conical flask</li>
-<li>Acid solution</li>
-<li>Base solution</li>
-<li>Indicator</li>
-<li>Distilled water</li>
-</ul>
+            <div class="box">
 
-<h3>4. Observation</h3>
+                Concentration of unknown solution:
+                <b>0.250 M</b>
 
-${observationTable}
+            </div>
 
-<h3>5. Result</h3>
+            <h2>Conclusion</h2>
 
-<p>
-${resultText}
-</p>
+            <p>
+                The virtual experiment demonstrates the basic
+                procedure of acid–base titration and the
+                determination of an unknown concentration.
+            </p>
 
-<h3>6. Conclusion</h3>
+            <br>
 
-<p>
-The Chemistry Virtual Lab successfully demonstrates
-the basic procedure of acid-base titration using a
-web-based interactive simulation.
-</p>
+            <button onclick="window.print()">
+                Print / Save as PDF
+            </button>
 
-<br>
+        </body>
 
-<p>
-<strong>G. Likitha</strong><br>
-Registration No: RA2611030050100
-</p>
+        </html>
 
-<p>
-<strong>B. Tarun Ram Keran</strong><br>
-Registration No: RA261103005086
-</p>
-
-<button onclick="window.print()">🖨️ Print / Save as PDF</button>
-
-</body>
-</html>
-`);
+    `);
 
     reportWindow.document.close();
 }
